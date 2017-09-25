@@ -8,9 +8,17 @@
 </head>
 
 <body>
-    <div ng-app="choreApp">
+    <h1>Isolate Scope</h1>
+    <div ng-app="isolateApp">
         <div ng-controller="ChoreCtrl">
             <kid done="logChore(chore)"></kid>
+        </div>
+        <hr>
+        <div ng-controller="AppCtrl">
+            <input type="text" ng-model="ctrlFlavor">
+            <div drink flavor="{{ctrlFlavor}}"></div>
+            <br>
+            <div phone="" dial="callHome(message)"></div>
         </div>
     </div>
 </body>
