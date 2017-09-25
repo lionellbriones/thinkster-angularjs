@@ -66,4 +66,13 @@ angular.module('app', [])
                 dirToDirCtrl.sayHi();
             }
         };
+    })
+    //Transclude
+    .directive('transclude', function() {
+        return {
+            restrict: 'E',
+            scope: {},
+            transclude: true,
+            template: '<div>This is the transclude component</div> <ng-transclude></<ng-transclude>'
+        }
     });
