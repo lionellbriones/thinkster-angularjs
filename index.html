@@ -4,7 +4,11 @@
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.0-beta.5/angular.min.js"></script>
         <script src="app.js"></script>
     </head>
-    <body ng-app="app" ng-controller="CtrltoDirCtrl as ctrltoDirCtrl">
-        <div ctrl-directive="ctrltoDirCtrl.start()">Hover me please!</div>
+    <body ng-app="app">
+        <div ng-controller="CtrltoDirCtrl as ctrltoDirCtrl">
+            <div ctrl-directive="ctrltoDirCtrl.start()">Hover me please!</div>
+        </div>
+        <dir-to-dir hello>Directive to Directive</dir-to-dir>      
+        <dir-to-dir howdy hi>Directive to Directive</dir-to-dir>        
     </body>
 </html>
