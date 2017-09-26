@@ -4,9 +4,18 @@
     function authInterceptor(API, auth) {
         return {
             request: function(config) {
+                var token = auth.getToken();
+                if(config.url.indexOf(API) === 0 && token) {
+                    config.headers.Authorization = 'Bearer ' + token;
+                }
+              
                 return config;
             },
             response: function(res) {
+                if(res.config.url.indexOf(API) === 0 && res.data.token) {
+                    auth.saveToken(res.data.token);
+                }
+
                 return res;
             }
         }
@@ -14,6 +23,35 @@
     
     function authService($window) {
         var self = this;
+
+        self.parseJwt = function(token) {
+            var base64Url = token.split('.')[1];
+            var base64 = base64Url.replace('-', '+').replace('_', '/');
+            return JSON.parse($window.atob(base64));
+        }
+
+        self.saveToken = function(token) {
+            $window.localStorage['jwtToken'] = token;
+        }
+
+        self.getToken = function() {
+            return $window.localStorage['jwtToken'];
+        }
+
+        self.logout = function() {
+            $window.localStorage.removeItem('jwtToken');
+        }
+
+        self.isAuthed = function() {
+            var token = self.getToken();
+
+            if(token) {
+                var params = self.parseJwt(token);
+                return Math.round(new Date().getTime() / 1000) <= params.exp;
+            } else {
+                return false;
+            }
+        }
     }
 
     function userService($http, API, auth) {
@@ -79,7 +117,7 @@
     .service('auth', authService)
     .constant('API', 'http://test-routes.herokuapp.com')
     .config(function($httpProvider) {
-        $httpProvider.inteceptors.push('authInterceptor');
+        $httpProvider.interceptors.push('authInterceptor');
     })
     .controller("MainCtrl", MainCtrl);
 })();
