@@ -1,4 +1,10 @@
-angular.module("app", []);
+angular.module("app", [])
+.config(function($logProvider) {
+    $logProvider.debugEnabled(true);
+})
+.run(function($rootScope, $log) {
+    $rootScope.$log = $log;
+});
 
 angular.module("app")
 .directive("dumbPassword", function() {

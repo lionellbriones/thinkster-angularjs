@@ -11,6 +11,12 @@
     <h1>View DOM</h1>
     <div ng-app="app">
         <dumb-password></dumb-password>
+        <hr>        
+        <div class="button"
+            ng-repeat="item in 'somewords'.split('') track by $index"
+            ng-click="$log.debug($event)">
+            {{$index + 1}}. {{item}}
+        </div>
     </div>
 </body>
 
