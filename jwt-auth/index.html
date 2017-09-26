@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Simple Angular Auth</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.0-beta.5/angular.min.js"></script>
+    <script src="app.js"></script>
+</head>
+<body ng-app="app" ng-controller="MainCtrl as mainCtrl">
+    <h1>Simple Angular Auth - Thinkster</h1>
+
+    <input type="text" placeholder="Username" ng-model="mainCtrl.username">
+    <input type="password" placeholder="Password" ng-model="mainCtrl.password">
+    <br>
+
+    <button ng-click="mainCtrl.register()">Register</button>
+    <button ng-click="mainCtrl.login()">Login</button>
+    <button ng-click="mainCtrl.logout()" ng-show="mainCtrl.isAuthed()">Logout</button>
+
+    <button ng-click="mainCtrl.getQuote()">get quote</button>
+    <br><br>
+    {{mainCtrl.message}}
+
+    <br><br><br>
+    <a href="https://twitter.com/IAmMattGreen">Shameless Plug</a>
+</body>
+</html>
